@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Search Recorder",
+    "version": "0.0.0",
+  
+    "default_locale": "ko",
+    "description": "Record Your Googling Steps!",
+    "icons": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "128": "images/icon-128.png"
+    },
+  
+    "browser_action": {},
+  
+    "author": "identity16",
+    "background": {
+      "persistent": false
+    }
+  }
+  
