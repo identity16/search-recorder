@@ -9,9 +9,10 @@
         "32": "images/icon-32.png",
         "128": "images/icon-128.png"
     },
-  
-    "browser_action": {},
-  
+    "permissions": [
+        "contextMenus",
+        "webNavigation"
+    ],
     "author": "identity16",
     "background": {
         "scripts": ["scripts/background.js"],
