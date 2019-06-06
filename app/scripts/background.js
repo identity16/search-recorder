@@ -6,8 +6,9 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.webNavigation.onCompleted.addListener(function (data) {
     var parsedUrl = getJsonFromUrl(data.url);
     console.log('history: ' + parsedUrl['q']);
-}, { url: [{ urlMatches: 'https://www.google.com/' }] });
+}, { url: [{ hostContains: 'www.google.', pathSuffix: 'search' }] });
 
+// URL에서 querystrinng을 읽어 JSON 형태로 리턴
 function getJsonFromUrl(url) {
     if (!url) url = location.href;
     var question = url.indexOf("?");
