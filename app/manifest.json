@@ -18,7 +18,8 @@
     },
     "permissions": [
         "contextMenus",
-        "webNavigation"
+        "webNavigation",
+        "storage"
     ],
     "author": "identity16",
     "background": {

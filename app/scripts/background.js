@@ -2,14 +2,20 @@ var isRecording = false;
 
 // 설치 시,
 chrome.runtime.onInstalled.addListener(function () {
+    // Initialize
+    chrome.storage.local.set({"searchRecords": []});
 });
 
 // 페이지 로드 시, 
 chrome.webNavigation.onCompleted.addListener(function (data) {
     if(!isRecording) return;
 
+    // 검색 기록을 스토리지 배열에 추가
     var parsedUrl = getJsonFromUrl(data.url);
-    console.log('history: ' + parsedUrl['q']);
+    chrome.storage.local.get(["searchRecords"], function(items) {
+        items.searchRecords.push(parsedUrl['q']);
+        chrome.storage.local.set({"searchRecords": items.searchRecords});
+    });
 }, { url: [{ hostContains: 'www.google.', pathSuffix: 'search' }] });
 
 
@@ -18,6 +24,11 @@ chrome.browserAction.onClicked.addListener(function() {
     if(isRecording) {   // 기록 종료
         // TODO: 팝업으로 기록된 내용 표시
         // TODO: 변수 초기화
+        chrome.storage.local.get(["searchRecords"], function(items) {
+            console.log(items.searchRecords);
+            // 다시 기록 초기화
+            chrome.storage.local.set({"searchRecords": []});
+        });
     }
 
     isRecording = !isRecording;
